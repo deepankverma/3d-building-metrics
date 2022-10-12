@@ -251,6 +251,13 @@ def tree_generator_function(cm, verts):
     for i, objid in enumerate(cm["CityObjects"]):
         obj = cm["CityObjects"][objid]
 
+#### Added to exclude parts with no geometry field in LoD data from Germany
+        try:
+            obj["geometry"]
+        except KeyError:
+            obj["geometry"] = []
+
+
         if len(obj["geometry"]) == 0:
             continue
 
